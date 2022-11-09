@@ -1,0 +1,38 @@
+.auth-navigation {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+}
+
+.auth-link {
+  margin: 0;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  opacity: 0.8;
+  transition: 0.4s;
+}
+
+.auth-link__signup {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.auth-link__signin {
+  width: 76px;
+  height: 32px;
+  background-color: #3DDC84;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000;
+}

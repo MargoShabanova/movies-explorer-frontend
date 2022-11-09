@@ -1,0 +1,42 @@
+.navigation__movies-links {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.navigation-link {
+  margin: 0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  column-gap: 13px;
+}
+
+.navigation-link:hover {
+  opacity: 0.8;
+  transition: 0.4s;
+}
+
+.navigation-link__all-movies {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #fff;
+}
+
+.navigation-link__saved-movies {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1,8;
+  color: #fff;
+}
+
+.navigation-link__profile {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+}
+
