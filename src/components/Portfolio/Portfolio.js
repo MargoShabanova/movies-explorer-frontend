@@ -1,4 +1,4 @@
-import './Portfolio.css';
+import "./Portfolio.css";
 
 export default function Portfolio() {
   return (
@@ -39,9 +39,6 @@ export default function Portfolio() {
           </a>
         </li>
       </ul>
-      {/* <h2 className="portfolio__link">Статичный сайт</h2>
-      <h2 className="portfolio__link">Адаптивный сайт</h2>
-      <h2 className="portfolio__link">Одностраничное приложение</h2> */}
     </section>
   );
 }

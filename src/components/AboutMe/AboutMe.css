@@ -53,6 +53,7 @@
 
 .about-me__description {
   max-width: 600px;
+  text-align: justify;
   margin: 0 0 99px;
   font-weight: 400;
   font-size: 14px;
@@ -62,11 +63,18 @@
 
 .about-me__github-link {
   margin: 0;
+  width: 46px;
+  text-decoration: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   color: #fff;
   text-decoration: none;
+}
+
+.about-me__github-link:hover {
+  opacity: 0.4;
+  transition: 0.4s;
 }
 
 @media (max-width: 768px) {
