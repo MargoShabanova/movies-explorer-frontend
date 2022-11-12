@@ -1,3 +1,4 @@
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 export default function SearchForm() {
@@ -16,6 +17,7 @@ export default function SearchForm() {
           <button className="search-form__submit" type="submit"></button>
         </label>
       </form>
+      <FilterCheckbox />
     </section>
   );
 }
