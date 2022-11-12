@@ -1,28 +1,33 @@
-import { Link } from "react-router-dom";
-import profile from "../../images/icon__profile.svg";
+import { NavLink, Link } from "react-router-dom";
+import Burger from "../Burger/Burger";
 import "./Navigation.css";
 
 export default function Navigation() {
   return (
     <>
-      <nav className="navigation__movies-links">
-        <Link
-          to="/movies"
-          className="navigation-link navigation-link__all-movies"
-        >
-          Фильмы
-        </Link>
-        <Link
-          to="/saved-movies"
-          className="navigation-link navigation-link__saved-movies"
-        >
-          Сохранённые фильмы
+      <nav className="navigation">
+        <div className="navigation__movies-links">
+          <NavLink
+            to="/movies"
+            className="navigation__link"
+            activeClassName="navigation-link_active"
+          >
+            Фильмы
+          </NavLink>
+          <NavLink
+            to="/saved-movies"
+            className="navigation__link"
+            activeClassName="navigation-link_active"
+          >
+            Сохранённые фильмы
+          </NavLink>
+        </div>
+        <Link to="/profile" className="navigation__account">
+          <p className="navigation__account-link">Аккаунт</p>
+          <div className="navigation__account-icon" />
         </Link>
       </nav>
-      <Link to="/profile" className="navigation-link">
-        <p className="navigation-link__profile">Аккаунт</p>
-        <img src={profile} className="navigation__img-profile" alt="Профиль" />
-      </Link>
+      <Burger />
     </>
   );
 }

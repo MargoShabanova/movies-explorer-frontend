@@ -1,0 +1,42 @@
+.burger {
+  display: none;
+}
+
+.burger:hover {
+  transition: 0.4s;
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    padding: 11px 8px 10px;
+    background-color: transparent;
+    border: none;
+    gap: 7px;
+  }
+  .burger::before, .burger span, .burger::after {
+    content: '';
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 400px) {
+  .burger {
+    gap: 6.5px;
+    width: 40px;
+    height: 43px;
+    padding: 12.5px 9px 10px;
+  }
+  .burger::before, .burger span, .burger::after {
+    width: 22px;
+    height: 2.5px;
+    background-color: #fff;
+  }
+}
