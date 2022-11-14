@@ -21,7 +21,7 @@ export default function MoviesCard({ card, onCardDelete }) {
   }`;
 
   return (
-    <li className="movies-card">
+    <li className={`movies-card ${savedMovies && "movies-card__saved"}`}>
       <img
         className="movies-card__image"
         src={card.image}

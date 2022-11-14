@@ -7,7 +7,7 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
-.movies-card:hover {
+.movies-card__saved {
   cursor: pointer;
 }
 

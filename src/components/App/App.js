@@ -5,8 +5,18 @@ import Footer from "../Footer/Footer";
 import { Route, Switch } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
+  const userData = {
+    name: "Маргарита",
+    email: "123@ya.ru"
+  }
+
+  function handleUpdateUser() {
+
+  }
+
   return (
     <div className="page">
       <Switch>
@@ -24,6 +34,10 @@ function App() {
           <Header loggedIn={true} />
           <SavedMovies />
           <Footer />
+        </Route>
+        <Route exact path="/profile">
+          <Header loggedIn={true} />
+          <Profile userData={userData} onUpdateUser={handleUpdateUser} />
         </Route>
       </Switch>
     </div>
