@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
 
-export default function Profile({ userData, onUpdateUser }) {
-
+export default function Profile({ userData }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
   const history = useHistory();
+
+  useEffect(() => {
+    setName(userData.name || "");
+    setEmail(userData.email || "");
+  }, [userData]);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -18,11 +23,6 @@ export default function Profile({ userData, onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    onUpdateUser({
-      name,
-      email,
-    });
   }
 
   function handleLogOut() {
@@ -33,13 +33,13 @@ export default function Profile({ userData, onUpdateUser }) {
 
   return (
     <main className="profile">
-      <form className="profile__form" onSubmit={handleSubmit}>
-      <h2 className="profile__form-name">{`Привет, ${userData.name}!`}</h2>
+      <form className="profile__form">
+        <h2 className="profile__form-name">{`Привет, ${name}!`}</h2>
         <fieldset className="profile__form-container">
           <label className="profile__input-container">
             <span className="profile__placeholder">Имя</span>
             <input
-              value={userData.name}
+              value={name}
               onChange={handleChangeName}
               className="profile__input"
               type="text"
@@ -53,7 +53,7 @@ export default function Profile({ userData, onUpdateUser }) {
           <label className="profile__input-container">
             <span className="profile__placeholder">E-mail</span>
             <input
-              value={userData.email}
+              value={email}
               onChange={handleChangeEmail}
               className="profile__input"
               type="email"
@@ -62,10 +62,18 @@ export default function Profile({ userData, onUpdateUser }) {
               required
             />
           </label>
-          <button type="submit" className="profile__form-button profile__form-button-submit">
+          <button
+            type="submit"
+            className="profile__form-button profile__form-button-submit"
+            onClick={handleSubmit}
+          >
             Редактировать
           </button>
-          <button type="button" className="profile__form-button profile__form-button-exit" onClick={handleLogOut}>
+          <button
+            type="button"
+            className="profile__form-button profile__form-button-exit"
+            onClick={handleLogOut}
+          >
             Выйти из аккаунта
           </button>
         </fieldset>

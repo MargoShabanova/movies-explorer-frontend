@@ -8,14 +8,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 
 function App() {
-  const userData = {
+  const currentUSer = {
     name: "Маргарита",
-    email: "123@ya.ru"
-  }
-
-  function handleUpdateUser() {
-
-  }
+    email: "123@ya.ru",
+  };
 
   return (
     <div className="page">
@@ -37,7 +33,7 @@ function App() {
         </Route>
         <Route exact path="/profile">
           <Header loggedIn={true} />
-          <Profile userData={userData} onUpdateUser={handleUpdateUser} />
+          <Profile userData={currentUSer} />
         </Route>
       </Switch>
     </div>
