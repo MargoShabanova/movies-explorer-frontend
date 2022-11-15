@@ -62,10 +62,10 @@ export default function Profile({ userData, onUpdateUser }) {
               required
             />
           </label>
-          <button type="submit" className="profile__form-submit">
+          <button type="submit" className="profile__form-button profile__form-button-submit">
             Редактировать
           </button>
-          <button type="button" className="profile__form-exit" onClick={handleLogOut}>
+          <button type="button" className="profile__form-button profile__form-button-exit" onClick={handleLogOut}>
             Выйти из аккаунта
           </button>
         </fieldset>

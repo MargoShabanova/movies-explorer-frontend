@@ -55,26 +55,30 @@
   color: #fff;
 }
 
-.profile__form-submit {
-  margin: 204px 0 16px;
+.profile__form-button {
   padding: 0;
   border: none;
   background-color: transparent;
+  cursor: pointer;
+}
+
+.profile__form-button:hover {
+  transition: 0.4s;
+  opacity: 0.4;
+}
+
+.profile__form-button-submit {
+  margin: 204px 0 16px;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   color: #fff;
-  cursor: pointer;
 }
 
-.profile__form-exit {
+.profile__form-button-exit {
   margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
   color: #EE3465;
-  cursor: pointer;
 }
