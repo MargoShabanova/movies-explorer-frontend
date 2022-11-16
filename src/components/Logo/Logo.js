@@ -1,15 +1,17 @@
 import logo from "../../images/logo.svg";
-import { Route, Link } from "react-router-dom";
-import './Logo.css';
+import { Link, useLocation } from "react-router-dom";
+import "./Logo.css";
 
 export default function Logo() {
+  const location = useLocation();
+  const authForms =
+    location.pathname === "/signup" || location.pathname === "/signin";
+
   return (
-    <div className="logo">
-      <Route path="/">
-        <Link className="logo__link" to="/">
-          <img className="logo__img" src={logo} alt="Лого" />
-        </Link>
-      </Route>
+    <div className={`${authForms && "logo__auth"}`}>
+      <Link className="logo__link" to="/">
+        <img className="logo__img" src={logo} alt="Лого" />
+      </Link>
     </div>
   );
 }

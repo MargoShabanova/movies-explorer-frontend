@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import "./Profile.css";
 
-export default function Profile({ userData }) {
+export default function Profile({ userData, handleLogOut }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
-  const history = useHistory();
 
   useEffect(() => {
     setName(userData.name || "");
@@ -23,12 +20,6 @@ export default function Profile({ userData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-  }
-
-  function handleLogOut() {
-    setName("");
-    setEmail("");
-    history.push("/");
   }
 
   return (
