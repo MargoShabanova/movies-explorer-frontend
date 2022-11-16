@@ -25,7 +25,7 @@ export default function Profile({ userData, handleLogOut }) {
   return (
     <main className="profile">
       <form className="profile__form">
-        <h2 className="profile__form-name">{`Привет, ${name}!`}</h2>
+        <h2 className="profile__form-title">{`Привет, ${name}!`}</h2>
         <fieldset className="profile__form-container">
           <label className="profile__input-container">
             <span className="profile__placeholder">Имя</span>
