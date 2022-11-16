@@ -9,6 +9,7 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Logo from "../Logo/Logo";
 import { useState } from "react";
+import Login from "../Login/Login";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,7 +17,7 @@ function App() {
     name: "Маргарита",
     email: "123@ya.ru",
     password: "",
-  })
+  });
 
   const history = useHistory();
 
@@ -25,15 +26,20 @@ function App() {
     history.push("/");
   };
 
-const handleLogOut = () => {
+  const handleLogin = () => {
+    setLoggedIn(true);
+    history.push("/");
+  }
+
+  const handleLogOut = () => {
     setUserData({
       name: "",
       email: "",
       password: "",
-    })
+    });
     setLoggedIn(false);
     history.push("/");
-  }
+  };
 
   return (
     <div className="page">
@@ -41,6 +47,10 @@ const handleLogOut = () => {
         <Route exact path="/signup">
           <Logo />
           <Register handleRegister={handleRegister} />
+        </Route>
+        <Route exact path="/signin">
+          <Logo />
+          <Login handleLogin={handleLogin} />
         </Route>
         <Route exact path="/">
           <Header loggedIn={loggedIn} />

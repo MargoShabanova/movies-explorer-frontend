@@ -1,6 +1,5 @@
 import { useState } from "react";
 import AuthForm from "../AuthForm/AuthForm";
-import "./Register.css";
 
 export default function Register({ handleRegister }) {
   const [userData, setUserData] = useState({
@@ -11,6 +10,7 @@ export default function Register({ handleRegister }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    
     setUserData({
       ...userData,
       [name]: value,
