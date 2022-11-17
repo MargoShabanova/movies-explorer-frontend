@@ -10,6 +10,7 @@ import Register from "../Register/Register";
 import Logo from "../Logo/Logo";
 import { useState } from "react";
 import Login from "../Login/Login";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -70,6 +71,9 @@ function App() {
         <Route exact path="/profile">
           <Header loggedIn={loggedIn} />
           <Profile userData={userData} handleLogOut={handleLogOut} />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
         </Route>
       </Switch>
     </div>
