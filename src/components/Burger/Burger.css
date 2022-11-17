@@ -81,10 +81,8 @@
     right: 30px;
     flex-direction: column;
     cursor: pointer;
-    /* width: 44px; */
     width: 44px;
     height: 23px;
-    /* padding: 11px 8px 10px; */
     padding: 0 8px 0;
     background-color: transparent;
     border: none;
@@ -148,8 +146,14 @@
   .burger {
     gap: 6.5px;
     width: 40px;
-    height: 43px;
-    padding: 12.5px 9px 10px;
+    height: 20,5px;
+    padding: 0 9px 0;
+  }
+  .burger_active::before {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .burger_active::after {
+    transform: translateY(-9px) rotate(-45deg);
   }
   .burger::before, .burger span, .burger::after {
     width: 22px;
