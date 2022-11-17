@@ -1,8 +1,8 @@
 import { NavLink, Link } from "react-router-dom";
-import Burger from "../Burger/Burger";
+import { Burger } from "../Burger/Burger";
 import "./Navigation.css";
 
-export default function Navigation() {
+export default function Navigation({ menuActive, onClick }) {
   return (
     <>
       <nav className="navigation">
@@ -27,7 +27,7 @@ export default function Navigation() {
           <div className="navigation__account-icon" />
         </Link>
       </nav>
-      <Burger />
+      <Burger menuActive={menuActive} onClick={onClick} />
     </>
   );
 }

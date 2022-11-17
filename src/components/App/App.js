@@ -11,9 +11,11 @@ import Logo from "../Logo/Logo";
 import { useState } from "react";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import { BurgerMenu } from "../Burger/Burger";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState({
     name: "Маргарита",
     email: "123@ya.ru",
@@ -30,7 +32,7 @@ function App() {
   const handleLogin = () => {
     setLoggedIn(true);
     history.push("/");
-  }
+  };
 
   const handleLogOut = () => {
     setUserData({
@@ -40,6 +42,10 @@ function App() {
     });
     setLoggedIn(false);
     history.push("/");
+  };
+
+  const handleToggleMenu = () => {
+    isOpen ? setIsOpen(false) : setIsOpen(true);
   };
 
   return (
@@ -54,28 +60,45 @@ function App() {
           <Login handleLogin={handleLogin} />
         </Route>
         <Route exact path="/">
-          <Header loggedIn={loggedIn} />
+          <Header
+            loggedIn={loggedIn}
+            menuActive={isOpen}
+            onClick={handleToggleMenu}
+          />
           <Main />
           <Footer />
         </Route>
         <Route exact path="/movies">
-          <Header loggedIn={loggedIn} />
+          <Header
+            loggedIn={loggedIn}
+            menuActive={isOpen}
+            onClick={handleToggleMenu}
+          />
           <Movies />
           <Footer />
         </Route>
         <Route exact path="/saved-movies">
-          <Header loggedIn={loggedIn} />
+          <Header
+            loggedIn={loggedIn}
+            menuActive={isOpen}
+            onClick={handleToggleMenu}
+          />
           <SavedMovies />
           <Footer />
         </Route>
         <Route exact path="/profile">
-          <Header loggedIn={loggedIn} />
+          <Header
+            loggedIn={loggedIn}
+            menuActive={isOpen}
+            onClick={handleToggleMenu}
+          />
           <Profile userData={userData} handleLogOut={handleLogOut} />
         </Route>
         <Route path="*">
           <PageNotFound />
         </Route>
       </Switch>
+      <BurgerMenu isOpen={isOpen} onClose={handleToggleMenu} />
     </div>
   );
 }
