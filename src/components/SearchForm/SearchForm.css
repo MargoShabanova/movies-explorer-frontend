@@ -47,6 +47,11 @@
   cursor: pointer;
 }
 
+.search-form__submit:hover {
+  transition: 0.4s;
+  opacity: 0.4;
+}
+
 @media (max-width: 768px) {
   .search {
     margin-left: 30px;
