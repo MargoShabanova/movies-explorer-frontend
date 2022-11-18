@@ -18,7 +18,7 @@ export function BurgerMenu({ isOpen, onClose }) {
     <div
       className={`burger__navigation ${isOpen && "burger__navigation_opened"}`}
     >
-      <div className="burger__navigation-container">
+      <nav className="burger__navigation-container">
         <Link to="/" className="burger__navigation-link" onClick={onClose}>
           Главная
         </Link>
@@ -46,7 +46,7 @@ export function BurgerMenu({ isOpen, onClose }) {
           <p className="burger__navigation-account-link">Аккаунт</p>
           <div className="burger__navigation-account-icon" />
         </Link>
-      </div>
+      </nav>
     </div>
   );
 }
