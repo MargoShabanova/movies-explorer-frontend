@@ -1,7 +1,7 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({ cards, onCardDelete }) {
+export default function MoviesCardList({ cards }) {
 
   return (
     <section className="movies-card-list">
