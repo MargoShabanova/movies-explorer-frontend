@@ -24,12 +24,12 @@ export default function MoviesCard({ card, onCardDelete }) {
     <li className={`movies-card ${savedMovies && "movies-card__saved"}`}>
       <img
         className="movies-card__image"
-        src={card.image}
+        src={card.image.url}
         alt="кадр из фильма"
       />
       <div className="movies-card__container">
         <div className="movies-card__name-container">
-          <h2 className="movies-card__name">{card.title}</h2>
+          <h2 className="movies-card__name">{card.nameRU}</h2>
           <h3 className="movies-card__duration">{card.duration}</h3>
         </div>
         <button

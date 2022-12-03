@@ -8,43 +8,85 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Logo from "../Logo/Logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { BurgerMenu } from "../Burger/Burger";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { mainApi } from "../../utils/MainApi";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "Маргарита",
-    email: "123@ya.ru",
-    password: "",
-  });
+  const [movies, setMovies] = useState([]);
+  // const [userData, setUserData] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  // });
 
   const history = useHistory();
 
-  const handleRegister = () => {
-    setLoggedIn(true);
-    history.push("/");
+  const handleRegister = (name, email, password) => {
+    mainApi
+      .signUp(name, email, password)
+      .then((res) => {
+        if (res.ok) {
+          setLoggedIn(true);
+          history.push("/movies");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
-    history.push("/");
+  const handleLogin = (email, password) => {
+    mainApi
+      .signIn(email, password)
+      .then((res) => {
+        console.log([currentUser]);
+        if (res.ok) {
+          setLoggedIn(true);
+          history.push("/movies");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleLogOut = () => {
-    setUserData({
-      name: "",
-      email: "",
-      password: "",
-    });
-    setLoggedIn(false);
-    history.push("/");
+    mainApi
+      .signOut()
+      .then(() => {
+        setCurrentUser({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setLoggedIn(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([mainApi.getProfile(), moviesApi.getMovies()])
+        .then(([currentUser, allMovies]) => {
+          setCurrentUser(currentUser);
+          setMovies(allMovies);
+          console.log(allMovies);
+          // console.log(allMovies);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   const handleToggleMenu = () => {
     isOpen ? setIsOpen(false) : setIsOpen(true);
@@ -77,7 +119,7 @@ function App() {
               menuActive={isOpen}
               onClick={handleToggleMenu}
             />
-            <Movies />
+            <Movies allMovies={movies}/>
             <Footer />
           </Route>
           <Route exact path="/saved-movies">
@@ -95,7 +137,7 @@ function App() {
               menuActive={isOpen}
               onClick={handleToggleMenu}
             />
-            <Profile userData={userData} handleLogOut={handleLogOut} />
+            <Profile userData={currentUser} handleLogOut={handleLogOut} />
           </Route>
           <Route path="*">
             <PageNotFound />

@@ -3,7 +3,6 @@ import { useState } from "react";
 
 export default function Login({ handleLogin }) {
   const [userData, setUserData] = useState({
-    name: "",
     email: "",
     password: "",
   })
