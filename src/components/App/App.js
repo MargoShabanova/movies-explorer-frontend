@@ -81,8 +81,6 @@ function App() {
         .then(([currentUser, allMovies]) => {
           setCurrentUser(currentUser);
           setMovies(allMovies);
-          console.log(allMovies);
-          // console.log(allMovies);
         })
         .catch((err) => console.log(err));
     }

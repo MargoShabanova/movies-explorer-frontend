@@ -1,3 +1,5 @@
+
+
 class MainApi {
   constructor({ baseUrl, beatfilmUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -115,7 +117,7 @@ class MainApi {
 export const mainApi = new MainApi({
   // baseUrl: "https://api.diploma.margosha.nomoredomains.icu",
   baseUrl: "http://localhost:3001",
-  beatfilmUrl: "https://api.nomoreparties.co",
+  beatfilmUrl: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json",
   },

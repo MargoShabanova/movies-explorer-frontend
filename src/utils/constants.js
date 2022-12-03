@@ -106,3 +106,5 @@ export const savedMovies = [
     duration: "1ч 42м",
   },
 ];
+
+export const beatfilmUrl = "https://api.nomoreparties.co";
