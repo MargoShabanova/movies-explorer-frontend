@@ -1,5 +1,3 @@
-
-
 class MainApi {
   constructor({ baseUrl, beatfilmUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -42,7 +40,7 @@ class MainApi {
 
   signOut() {
     return fetch(`${this._baseUrl}/signout`, {
-      method: "DELETE",
+      method: "POST",
       credentials: "include",
       headers: this._headers,
     }).then(this._checkResponse);

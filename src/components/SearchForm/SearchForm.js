@@ -1,10 +1,16 @@
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import './SearchForm.css';
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import "./SearchForm.css";
 
-export default function SearchForm() {
+export default function SearchForm({
+  handleSubmit,
+  handleChange,
+  value,
+  onCheckShortMovies,
+  checkedShortMovies,
+}) {
   return (
     <section className="search">
-      <form className="search-form">
+      <form className="search-form" onSubmit={handleSubmit}>
         <label className="search-form__container">
           <input
             className="search-form__input"
@@ -13,11 +19,16 @@ export default function SearchForm() {
             name="search"
             id="search-movies"
             required
+            value={value}
+            onChange={handleChange}
           />
           <button className="search-form__submit" type="submit"></button>
         </label>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox
+        onCheckShortMovies={onCheckShortMovies}
+        checkedShortMovies={checkedShortMovies}
+      />
     </section>
   );
 }
