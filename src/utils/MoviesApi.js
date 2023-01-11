@@ -1,4 +1,4 @@
-import { beatfilmUrl } from "../utils/constants";
+import { BEATFILM_URL } from "../utils/constants";
 
 class MoviesApi {
   constructor({ baseUrl, headers }) {
@@ -20,7 +20,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-  baseUrl: beatfilmUrl,
+  baseUrl: BEATFILM_URL,
   headers: {
     "Content-Type": "application/json",
   },

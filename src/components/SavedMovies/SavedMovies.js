@@ -1,83 +1,71 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import { useState } from "react";
-import { useEffect } from "react";
-import Preloader from "../Preloader/Preloader";
+import { useEffect, useState } from "react";
+import { NOT_FOUND_ERROR, DURATION } from "../../utils/constants";
+import "../Movies/Movies.css";
 
-export default function SavedMovies({
-  isShowCards,
-  setIsShowCards,
-  savedMovies,
-  isSearchFormError,
-  setIsSearchFormError,
-  isSearchValue,
-  setIsSearchValue,
-  setIsMoviesSearch,
-  isLoading,
-  setIsLoading,
-  onDeleteCard,
-  onAddCard,
-  isLiked,
-  checkId,
-}) {
+export default function SavedMovies({ savedMovies, onDeleteCard }) {
   const [isShortMovies, setIsShortMovies] = useState(false);
+  const [isError, setIsError] = useState("");
+  const [visibleMovies, setVisibleMovies] = useState(savedMovies);
+  const [searchValue, setSearchValue] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
-  // useEffect(() => {
-  //   setIsShowCards(savedMovies);
-  //   setIsSearchFormError("");
-  //   setIsSearchValue("");
-  // }, []);
-
-  function handleSearchMovies() {
-    const filter = savedMovies.filter((item) =>
-      item.nameRU.toLowerCase().includes(isSearchValue.toLowerCase())
-    );
-    filter.length === 0
-      ? setIsSearchFormError("Ничего не найдено")
-      : setIsShowCards(filter) && setIsMoviesSearch(filter);
-
-    setIsLoading(false);
+  function searchMovie(movies, keyWord) {
+    const movieFromSearch = movies.filter((item) => {
+      const nameRu = item.nameRU.toString().toLowerCase();
+      const nameEn = item.nameEN.toString().toLowerCase();
+      const finalMovie = keyWord.toLowerCase();
+      return (
+        nameRu.indexOf(finalMovie) !== -1 || nameEn.indexOf(finalMovie) !== -1
+      );
+    });
+    return movieFromSearch;
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function filterCheckbox(movies) {
+    return Array.isArray(movies)
+      ? movies.filter((item) => item.duration < DURATION)
+      : null;
+  }
 
-    setIsLoading(true);
-    isSearchValue && handleSearchMovies();
+  useEffect(() => {
+    if (visibleMovies.length === 0) {
+      setNotFound(true);
+      setIsError(NOT_FOUND_ERROR);
+    } else {
+      setNotFound(false);
+      setIsError("");
+    }
+  }, [visibleMovies]);
+
+  useEffect(() => {
+    const cardList = searchMovie(savedMovies, searchValue);
+    setVisibleMovies(isShortMovies ? filterCheckbox(cardList) : cardList);
+  }, [isShortMovies, searchValue, savedMovies]);
+
+  function handleSearchClick(keyWord) {
+    setSearchValue(keyWord);
   }
 
   function handleCheckShortMovies() {
     setIsShortMovies(!isShortMovies);
   }
 
-  const visibleMovies = isShortMovies
-    ? isShowCards.filter((item) => item.duration < 40)
-    : isShowCards;
-
-  function handleChange(e) {
-    setIsSearchValue(e.target.value);
-    // setIsError(false);
-  }
-
   return (
     <main className="saved-movies">
       <SearchForm
-        handleSubmit={handleSubmit}
-        value={isSearchValue}
-        handleChange={handleChange}
+        handleSearch={handleSearchClick}
         onCheckShortMovies={handleCheckShortMovies}
         checkedShortMovies={isShortMovies}
       />
-      {isLoading ? (
-        <Preloader />
+      {notFound ? (
+        <p className="movies__error">{isError}</p>
       ) : (
         <MoviesCardList
-          movies={visibleMovies}
+          visibleCards={visibleMovies}
+          savedCards={savedMovies}
           onDeleteCard={onDeleteCard}
-          onAddCard={onAddCard}
-          checkId={checkId}
-          isLiked={isLiked}
-          isSearchFormError={isSearchFormError}
         />
       )}
     </main>

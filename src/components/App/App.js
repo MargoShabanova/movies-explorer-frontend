@@ -15,19 +15,59 @@ import { BurgerMenu } from "../Burger/Burger";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
+import {
+  EDIT_PROFILE_SUCCESS,
+  TRY_AGAIN_ERROR,
+  SERVER_ERROR,
+  INCORRECT_DATA_ERROR,
+  EMAIL_ERROR,
+} from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") || false);
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState("");
-
-  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const history = useHistory();
   const location = useLocation();
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([mainApi.getProfile(), mainApi.getMovies()])
+      .then(([currentUser, myMovies]) => {
+          setLoggedIn(true);
+          setCurrentUser(currentUser);
+          setIsLoading(true);
+          setSavedMovies(myMovies);
+          console.log([myMovies]);
+          console.log(loggedIn);
+          localStorage.setItem("location", sessionStorage);
+          history.push(location);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoggedIn(false);
+        if (err) {
+          setCurrentUser({
+            name: "",
+            email: "",
+            password: "",
+          });
+          localStorage.clear();
+          setLoggedIn(false);
+          history.push("/");
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   const handleRegister = (name, email, password) => {
     mainApi
@@ -35,17 +75,18 @@ function App() {
       .then((res) => {
         if (res.ok) {
           setLoggedIn(true);
+          localStorage.setItem("loggedIn", true);
           history.push("/movies");
         } else {
           setIsError(true);
           if (res.status === 409) {
-            setIsErrorMessage("Данный email уже существует.");
+            setIsErrorMessage(EMAIL_ERROR);
           } else if (res.status === 500) {
-            setIsErrorMessage("На сервере произошла ошибка");
+            setIsErrorMessage(SERVER_ERROR);
           } else if (res.status === 400) {
-            setIsErrorMessage("Переданы некорректные данные.");
+            setIsErrorMessage(INCORRECT_DATA_ERROR);
           } else {
-            setIsErrorMessage("Произошла ошибка, попробуйте еще раз.");
+            setIsErrorMessage(TRY_AGAIN_ERROR);
           }
         }
       })
@@ -58,19 +99,40 @@ function App() {
       .then((res) => {
         if (res.ok) {
           setLoggedIn(true);
+          localStorage.setItem("loggedIn", true);
           history.push("/movies");
+          localStorage.setItem("location", sessionStorage);
         } else {
           setIsError(true);
           if (res.status === 500) {
-            setIsErrorMessage("На сервере произошла ошибка");
+            setIsErrorMessage(SERVER_ERROR);
           } else if (res.status === 400) {
-            setIsErrorMessage("Переданы некорректные данные.");
+            setIsErrorMessage(INCORRECT_DATA_ERROR);
           } else {
-            setIsErrorMessage("Произошла ошибка, попробуйте еще раз.");
+            setIsErrorMessage(TRY_AGAIN_ERROR);
           }
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const setTimerForMessage = () => {
+    setTimeout(() => setIsErrorMessage(""), 5000);
+  };
+
+  const handleUpdateUser = (data) => {
+    mainApi
+      .editProfile(data.name, data.email)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsErrorMessage(EDIT_PROFILE_SUCCESS);
+        setTimerForMessage();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsErrorMessage(TRY_AGAIN_ERROR);
+        setTimerForMessage();
+      });
   };
 
   const handleLogOut = () => {
@@ -91,41 +153,23 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    Promise.all([mainApi.getProfile(), moviesApi.getMovies()])
-      .then(([currentUser, allMovies]) => {
-        setLoggedIn(true);
-        setCurrentUser(currentUser);
-        setMovies(allMovies);
-        localStorage.setItem("location", sessionStorage);
-        history.push(location);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err) {
-          setCurrentUser({
-            name: "",
-            email: "",
-            password: "",
-          });
-          localStorage.clear();
-          setLoggedIn(false);
-          history.push("/");
-        }
-      });
-  }, [loggedIn, history]);
-
-  const handleUpdateUser = (data) => {
-    mainApi
-      .editProfile(data.name, data.email)
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const handleToggleMenu = () => {
     isOpen ? setIsOpen(false) : setIsOpen(true);
+  };
+
+  const handleLikeMovie = (movie) => {
+    mainApi.addMovie(movie).then((res) => {
+      setSavedMovies([...savedMovies, res]);
+    });
+  };
+
+  const handleDeleteMovie = (movie) => {
+    mainApi
+      .deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies((arr) => arr.filter((item) => item._id !== movie._id));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -164,19 +208,11 @@ function App() {
               onClick={handleToggleMenu}
             />
             <Movies
-              movies={movies}
-              // isSearchValue={isSearchValue}
-              // setIsSearchValue={setIsSearchValue}
-              // isSearchFormError={isSearchFormError}
-              // setIsSearchFormError={setIsSearchFormError}
-              // setIsMoviesSearch={setIsMoviesSearch}
-              // isLoading={isLoading}
-              // setIsLoading={setIsLoading}
-              // onClick={handleSearchClick}
-              // onDeleteCard={handleDeleteCard}
-              // onAddCard={handleAddCard}
-              // checkId={checkId}
-              // isLiked={checkLike}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              onDeleteCard={handleDeleteMovie}
+              onAddCard={handleLikeMovie}
+              savedMovies={savedMovies}
             />
             <Footer />
           </ProtectedRoute>
@@ -187,24 +223,8 @@ function App() {
               onClick={handleToggleMenu}
             />
             <SavedMovies
-            // isShowCards={isShowCards}
-            // setIsShowCards={setIsShowCards}
-            // savedMovies={isSavedMovies}
-            // isSearchFormError={isSearchFormError}
-            // setIsSearchFormError={setIsSearchFormError}
-            // isSearchValue={isSaveSearchValue}
-            // setIsSearchValue={setIsSaveSearchValue}
-            // setIsMoviesSearch={setIsSavedMoviesSearch}
-            // isLoading={isLoading}
-            // setIsLoading={setIsLoading}
-            // onDeleteCard={handleDeleteCard}
-            // onAddCard={handleAddCard}
-            // isLiked={checkLike}
-            // checkId={checkId}
-            // isLiked={checkLike}
-
-            // setMovies={setIsMovieSave}
-            // isMovieSearch={isMovieSaveSearch}
+              savedMovies={savedMovies}
+              onDeleteCard={handleDeleteMovie}
             />
             <Footer />
           </ProtectedRoute>
@@ -217,6 +237,7 @@ function App() {
             <Profile
               onUpdateUser={handleUpdateUser}
               handleLogOut={handleLogOut}
+              message={isErrorMessage}
             />
           </ProtectedRoute>
           <Route path="*">

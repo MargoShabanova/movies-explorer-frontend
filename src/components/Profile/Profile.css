@@ -62,6 +62,15 @@
   color: #fff;
 }
 
+.profile__api-message {
+  margin: 70px auto 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #EE3465;
+}
+
 .profile__form-button {
   padding: 0;
   border: none;

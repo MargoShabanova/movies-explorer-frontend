@@ -1,13 +1,6 @@
-import { useContext, useState, useCallback } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useCallback, useState } from "react";
 
 export function useFormWithValidation() {
-  // const currentUser = useContext(CurrentUserContext);
-  // const [values, setValues] = useState({
-  //   name: currentUser.name || "",
-  //   email: currentUser.email || "",
-  //   password: "",
-  // });
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -30,5 +23,5 @@ export function useFormWithValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm };
+  return { values, handleChange, errors, isValid, setIsValid, resetForm };
 }

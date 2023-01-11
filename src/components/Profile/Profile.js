@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/validation";
 import "./Profile.css";
 
-export default function Profile({ onUpdateUser, handleLogOut }) {
+export default function Profile({ onUpdateUser, handleLogOut, message }) {
   const currentUser = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, resetForm } =
@@ -73,6 +73,7 @@ export default function Profile({ onUpdateUser, handleLogOut }) {
               {errors.email}
             </span>
           </label>
+          <span className="profile__api-message">{message}</span>
           <button
             type="submit"
             className={`profile__form-button profile__form-button-submit ${

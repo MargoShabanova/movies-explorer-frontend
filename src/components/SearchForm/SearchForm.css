@@ -52,6 +52,15 @@
   opacity: 0.4;
 }
 
+.search_form__error {
+  margin: 40px auto 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #EE3465;
+}
+
 @media (max-width: 768px) {
   .search {
     margin-left: 30px;
