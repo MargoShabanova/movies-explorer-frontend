@@ -17,6 +17,9 @@ export default function MoviesCardList({
   const handleResize = () => window.innerWidth;
   const [isWindowWidth, setIsWindowWidth] = useState(handleResize());
 
+  const history = useHistory();
+  const moviesPage = history.location.pathname === "/movies";
+
   useEffect(() => {
     function handleTimeout() {
       setTimeout(() => setIsWindowWidth(handleResize()), 1000);
@@ -40,10 +43,6 @@ export default function MoviesCardList({
           : LOADING_CARDS.table,
     });
   }, [isWindowWidth]);
-
-  const history = useHistory();
-
-  const moviesPage = history.location.pathname === "/movies";
 
   useEffect(() => {
     Array.isArray(visibleCards)

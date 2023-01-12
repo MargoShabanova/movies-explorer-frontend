@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import SearchForm from "../SearchForm/SearchForm";
-import { SEARCH_FORM_ERROR, NOT_FOUND_ERROR, DURATION } from "../../utils/constants";
+import {
+  SEARCH_FORM_ERROR,
+  NOT_FOUND_ERROR,
+  DURATION,
+} from "../../utils/constants";
 import "./Movies.css";
 import { moviesApi } from "../../utils/MoviesApi";
 
@@ -51,8 +55,8 @@ export default function Movies({
 
   function filterCheckbox(movies) {
     return Array.isArray(movies)
-      ? movies.filter((item) => item.duration < DURATION)
-      : null;
+      ? movies.filter((item) => item.duration <= DURATION)
+      : movies;
   }
 
   function handleSearch(cards, value) {
@@ -103,8 +107,8 @@ export default function Movies({
   function handleCheckShortMovies() {
     setIsShortMovies(!isShortMovies);
     localStorage.setItem("short-movies", isShortMovies);
-
     const movies = JSON.parse(localStorage.getItem("movies"));
+
     if (!isShortMovies) {
       setIsShortMovies(true);
       setVisibleMovies(filterCheckbox(movies));

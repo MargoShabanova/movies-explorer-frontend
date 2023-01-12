@@ -26,7 +26,7 @@ export default function SavedMovies({ savedMovies, onDeleteCard }) {
   function filterCheckbox(movies) {
     return Array.isArray(movies)
       ? movies.filter((item) => item.duration < DURATION)
-      : null;
+      : movies;
   }
 
   useEffect(() => {

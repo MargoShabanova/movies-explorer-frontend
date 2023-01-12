@@ -1,7 +1,7 @@
 export const BEATFILM_URL = "https://api.nomoreparties.co";
 export const LOCAL_API_URL = "https://api.diploma.margosha.nomoredomains.icu";
 
-export const DURATION = 40;
+export const DURATION = 41;
 
 export const WINDOW_WIDTH = { desktop: 1280, table: 1200, mobile: 689 };
 export const SHOW_CARDS = { desktop: 12, table: 8, mobile: 5 };

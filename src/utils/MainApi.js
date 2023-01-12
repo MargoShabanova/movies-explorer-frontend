@@ -1,4 +1,4 @@
-import { BEATFILM_URL } from "../utils/constants";
+import { BEATFILM_URL, LOCAL_API_URL } from "../utils/constants";
 
 class MainApi {
   constructor({ baseUrl, beatfilmUrl, headers }) {
@@ -115,8 +115,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  // baseUrl: "https://api.diploma.margosha.nomoredomains.icu",
-  baseUrl: "http://localhost:3001",
+  baseUrl: LOCAL_API_URL,
   beatfilmUrl: BEATFILM_URL,
   headers: {
     "Content-Type": "application/json",
