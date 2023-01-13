@@ -25,6 +25,7 @@ export default function SearchForm({
       values.search = value;
       setIsValid(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moviesPage]);
 
   useEffect(() => {
