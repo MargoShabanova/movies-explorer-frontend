@@ -1,0 +1,33 @@
+.logo__auth {
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 70px 0 40px;
+  display: flex;
+  align-content: center;
+}
+
+.logo__img {
+  width: 38px;
+  height: 38px;
+  vertical-align: top;
+  object-fit: cover;
+  object-position: center;
+}
+
+.logo__img:hover {
+  opacity: 0.4;
+  transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+  .logo__auth {
+    padding-top: 232px;
+  }
+}
+  
+@media (max-width: 500px) {
+  .logo__auth {
+    padding: 56px 0 50px;
+    justify-content: center;
+  }
+}

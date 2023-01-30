@@ -1,0 +1,124 @@
+.profile {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 70px;
+  padding: 0;
+}
+
+.profile__form-title {
+  margin: 74px 0 106px;
+  max-width: 410px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #fff;
+}
+
+.profile__form-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 410px;
+  border: none;
+}
+
+.profile__input-container {
+  padding: 0 0 16px;
+  margin: 17px 0 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.profile__input-container:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile__placeholder {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #fff;
+}
+
+.profile__input {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: end;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #fff;
+}
+
+.profile__form-button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.profile__form-button:hover {
+  transition: 0.4s;
+  opacity: 0.4;
+}
+
+.profile__form-button-submit {
+  margin: 220px 0 16px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.profile__form-button-exit {
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #EE3465;
+}
+
+@media (max-width: 768px) {
+  .profile__form {
+    margin-bottom: 269px;
+  }
+  .profile__form-title {
+    margin: 236px 0 79px;
+  }
+  .profile__form-button-submit {
+    margin-top: 210px;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile__form {
+    margin-bottom: 40px;
+  }
+  .profile__form-title {
+    margin: 70px 0 80px;
+    max-width: 260px;
+  }
+  .profile__form-container {
+    width: 260px;
+  }
+  .profile__form-button-submit {
+    margin-top: 379px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .profile__form-button-exit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
