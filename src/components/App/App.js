@@ -25,7 +25,9 @@ import {
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") || false);
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("loggedIn") || false
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState("");
@@ -38,7 +40,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getProfile(), mainApi.getMovies()])
-      .then(([currentUser, myMovies]) => {
+        .then(([currentUser, myMovies]) => {
           setLoggedIn(true);
           setCurrentUser(currentUser);
           setIsLoading(true);
@@ -47,24 +49,24 @@ function App() {
           console.log(loggedIn);
           localStorage.setItem("location", sessionStorage);
           history.push(location);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoggedIn(false);
-        if (err) {
-          setCurrentUser({
-            name: "",
-            email: "",
-            password: "",
-          });
-          localStorage.clear();
+        })
+        .catch((err) => {
+          console.log(err);
           setLoggedIn(false);
-          history.push("/");
-        }
-      });
+          if (err) {
+            setCurrentUser({
+              name: "",
+              email: "",
+              password: "",
+            });
+            localStorage.clear();
+            setLoggedIn(false);
+            history.push("/");
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);

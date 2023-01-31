@@ -54,7 +54,6 @@ class MainApi {
       headers: this._headers,
     })
       .then(this._checkResponce)
-      .catch(console.log);
   }
 
   editProfile(name, email) {
@@ -68,7 +67,6 @@ class MainApi {
       }),
     })
       .then(this._checkResponce)
-      .catch(console.log);
   }
 
   getMovies() {
@@ -77,7 +75,6 @@ class MainApi {
       headers: this._headers,
     })
       .then(this._checkResponce)
-      .catch(console.log);
   }
 
   addMovie(movie) {
@@ -100,7 +97,6 @@ class MainApi {
       }),
     })
       .then(this._checkResponce)
-      .catch(console.log);
   }
 
   deleteMovie(id) {
@@ -110,7 +106,6 @@ class MainApi {
       headers: this._headers,
     })
       .then(this._checkResponce)
-      .catch(console.log);
   }
 }
 
