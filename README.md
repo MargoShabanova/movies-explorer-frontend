@@ -2,6 +2,8 @@
 
 Проект "Movies Explorer".
 
+https://user-images.githubusercontent.com/99093433/216053822-064e5e1e-a74a-4005-9852-3cc4305994ac.mp4
+
 * Функционал: регистрация и авторизация пользователей, редактирование профиля, поиск и сохранение фильмов, сохранение состояния поиска.
 * Технологии: HTML, CSS, JS, React, Git.
 
@@ -12,6 +14,3 @@
 ## [Ссылка на сайт](https://diploma.margosha.nomoredomains.club/)
 
 ## [Bakend](https://github.com/MargoShabanova/movies-explorer-api)
-
-
-
