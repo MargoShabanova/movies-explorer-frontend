@@ -15,6 +15,10 @@
   gap: 37px 24px;
 }
 
+.movies-card-list__show-more {
+  margin: 0 auto;
+}
+
 .movies-card-list__button {
   padding: 0;
   margin: 50px 0 80px;

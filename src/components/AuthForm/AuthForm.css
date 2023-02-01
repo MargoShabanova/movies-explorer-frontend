@@ -78,9 +78,17 @@
   display: block;
 }
 
+.form__span-error_active-email {
+  bottom: -25px;
+}
+
 .form__submit {
   margin: 69px 0 0;
   padding: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 396px;
   height: 45px;
   border: none;
@@ -96,6 +104,16 @@
 .form__submit:hover {
   transition: 0.4s;
   opacity: 0.4;
+}
+
+.form__submit_disable {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+}
+
+.form__submit_disable:hover {
+  cursor: default;
+  opacity: 1;
 }
 
 .form__question {
@@ -119,6 +137,23 @@
 .form__link:hover {
   transition: 0.4s;
   opacity: 0.4;
+}
+
+.form__error {
+  display: none;
+  position: absolute;
+  top: -20px;
+  margin: 0 auto;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF004C;
+}
+
+.form__error_active {
+  display: flex;
 }
 
 @media (max-width: 768px) {
