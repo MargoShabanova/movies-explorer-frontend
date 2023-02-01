@@ -1,6 +1,4 @@
-# movies-explorer-frontend
-
-Проект "Movies Explorer".
+# Фронтенд проекта "Movies Explorer".
 
 https://user-images.githubusercontent.com/99093433/216054494-d3ea4ad4-858b-45b7-8de9-c840bb65e442.mp4
 
